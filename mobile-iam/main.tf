@@ -1,5 +1,5 @@
 # mobile-iam/main.tf
-# ROC-719: OIDC IAM roles for rockethot-consulting-group/rockethot-mobile-monorepo CI/CD
+# ROC-719: OIDC IAM roles for rockethot-consulting-group/rockethot-portal mobile CI/CD
 #
 # Reuses the existing token.actions.githubusercontent.com OIDC IdP.
 # Do not create a new IdP — reference it here via data source.
@@ -29,7 +29,7 @@ data "aws_caller_identity" "current" {}
 
 # ---- Trust policies ----
 
-# Shared trust for CI builds: all refs in rockethot-mobile-monorepo.
+# Shared trust for CI builds: all refs in rockethot-portal (mobile paths).
 # Used by mobile-ci only. mobile-release uses the tighter environment-scoped trust below.
 data "aws_iam_policy_document" "mobile_ci_trust" {
   statement {
@@ -42,7 +42,7 @@ data "aws_iam_policy_document" "mobile_ci_trust" {
     condition {
       test     = "StringLike"
       variable = "token.actions.githubusercontent.com:sub"
-      values   = ["repo:rockethot-consulting-group/rockethot-mobile-monorepo:*"]
+      values   = ["repo:rockethot-consulting-group/rockethot-portal:*"]
     }
     condition {
       test     = "StringEquals"
@@ -68,7 +68,7 @@ data "aws_iam_policy_document" "mobile_release_trust" {
     condition {
       test     = "StringEquals"
       variable = "token.actions.githubusercontent.com:sub"
-      values   = ["repo:rockethot-consulting-group/rockethot-mobile-monorepo:environment:mobile-release"]
+      values   = ["repo:rockethot-consulting-group/rockethot-portal:environment:mobile-release"]
     }
     condition {
       test     = "StringEquals"
@@ -88,7 +88,7 @@ resource "aws_iam_role" "mobile_ci" {
   tags = {
     ManagedBy   = "terraform"
     IssueRef    = "ROC-719"
-    Purpose     = "GitHub Actions OIDC — rockethot-mobile-monorepo CI builds"
+    Purpose     = "GitHub Actions OIDC — rockethot-portal mobile CI builds"
   }
 }
 
@@ -121,7 +121,7 @@ resource "aws_iam_role" "mobile_release" {
   tags = {
     ManagedBy   = "terraform"
     IssueRef    = "ROC-719"
-    Purpose     = "GitHub Actions OIDC — rockethot-mobile-monorepo release builds (mobile-release env)"
+    Purpose     = "GitHub Actions OIDC — rockethot-portal mobile release builds (mobile-release env)"
   }
 }
 
