@@ -1,5 +1,5 @@
 # mobile-iam/main.tf
-# ROC-719: OIDC IAM roles for rockethot/rockethot-mobile-monorepo CI/CD
+# ROC-719: OIDC IAM roles for rockethot-consulting-group/rockethot-mobile-monorepo CI/CD
 #
 # Reuses the existing token.actions.githubusercontent.com OIDC IdP.
 # Do not create a new IdP — reference it here via data source.
@@ -42,7 +42,7 @@ data "aws_iam_policy_document" "mobile_ci_trust" {
     condition {
       test     = "StringLike"
       variable = "token.actions.githubusercontent.com:sub"
-      values   = ["repo:rockethot/rockethot-mobile-monorepo:*"]
+      values   = ["repo:rockethot-consulting-group/rockethot-mobile-monorepo:*"]
     }
     condition {
       test     = "StringEquals"
@@ -68,7 +68,7 @@ data "aws_iam_policy_document" "mobile_release_trust" {
     condition {
       test     = "StringEquals"
       variable = "token.actions.githubusercontent.com:sub"
-      values   = ["repo:rockethot/rockethot-mobile-monorepo:environment:mobile-release"]
+      values   = ["repo:rockethot-consulting-group/rockethot-mobile-monorepo:environment:mobile-release"]
     }
     condition {
       test     = "StringEquals"
