@@ -88,7 +88,7 @@ resource "aws_iam_role" "mobile_ci" {
   tags = {
     ManagedBy   = "terraform"
     IssueRef    = "ROC-719"
-    Purpose     = "GitHub Actions OIDC — rockethot-portal mobile CI builds"
+    Purpose     = "GitHub Actions OIDC - rockethot-portal mobile CI builds"
   }
 }
 
@@ -121,7 +121,7 @@ resource "aws_iam_role" "mobile_release" {
   tags = {
     ManagedBy   = "terraform"
     IssueRef    = "ROC-719"
-    Purpose     = "GitHub Actions OIDC — rockethot-portal mobile release builds (mobile-release env)"
+    Purpose     = "GitHub Actions OIDC - rockethot-portal mobile release builds for mobile-release env"
   }
 }
 
